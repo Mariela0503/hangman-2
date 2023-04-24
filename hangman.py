@@ -1,6 +1,6 @@
 import random
-from words import words
-from hangman_visual import lives_visual_dict
+from words import words # download words.py 
+from hangman_visual import lives_visual_dict #download hangman visuals
 import string
 
 
@@ -18,7 +18,7 @@ def hangman():
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  
 
-    lives = 7
+    lives = 7 # determine how many lives the user should have 
 
     while len(word_letters) > 0 and lives > 0:
 
@@ -26,7 +26,7 @@ def hangman():
 
         word_list = [letter if letter in used_letters else '-' for letter in word]
         print(lives_visual_dict[lives])
-        print('Current word: ', ' '.join(word_list))
+        print('Current word: ', ' '.join(word_list)) # make sure that visuals print according to user inputs
 
         user_letter = input('Guess a letter: ').upper()
         if user_letter in alphabet - used_letters:
@@ -52,5 +52,5 @@ def hangman():
         print('YAY! You guessed the word', word, '!!')
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # where does this come in?
     hangman()
