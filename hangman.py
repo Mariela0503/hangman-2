@@ -25,7 +25,7 @@ def hangman(difficulty):
 
     while len(word_letters) > 0 and lives > 0:
 
-        print('You have', lives, 'lives left and you have used these letters: ', ' '.join(used_letters))
+        print('You have', lives, 'lives left and you have used these letters: ', ' '.join(sorted(used_letters)))
 
         word_list = [letter if letter in used_letters else '-' for letter in word]
         print(lives_visual_dict[lives])
@@ -51,8 +51,10 @@ def hangman(difficulty):
     if lives == 0:
         print(lives_visual_dict[lives])
         print('You died, sorry. The word was', word)
+        return False
     else:
         print('YAY! You guessed the word', word, '!!')
+        return True
 
 difficulty = 0
 
@@ -61,5 +63,9 @@ if __name__ == '__main__': # where does this come in?
         if get_valid_word(words, difficulty + 2, difficulty + 4) == "NONE":
             print("Congrats, you won!!")
             break
-        hangman(difficulty)
-        difficulty = difficulty + 2
+        if hangman(difficulty):
+            difficulty = difficulty + 2
+        else:
+            print("You lost :(")
+            break
+        
