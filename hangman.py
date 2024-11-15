@@ -10,11 +10,13 @@ def get_valid_word(words, min_length, max_length):
         if len(word) >= min_length and len(word) <= max_length:
             valid_words.append(word)
 
+    if len(valid_words) == 0:
+        return "NONE"
+
     return random.choice(valid_words).upper()
 
-
-def hangman():
-    word = get_valid_word(words, 7, 8)
+def hangman(difficulty):
+    word = get_valid_word(words, difficulty + 2, difficulty + 4)
     word_letters = set(word) 
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  
@@ -52,6 +54,12 @@ def hangman():
     else:
         print('YAY! You guessed the word', word, '!!')
 
+difficulty = 0
 
 if __name__ == '__main__': # where does this come in?
-    hangman()
+    while True:
+        if get_valid_word(words, difficulty + 2, difficulty + 4) == "NONE":
+            print("Congrats, you won!!")
+            break
+        hangman(difficulty)
+        difficulty = difficulty + 2
