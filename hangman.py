@@ -4,16 +4,17 @@ from hangman_visual import lives_visual_dict #download hangman visuals
 import string
 
 
-def get_valid_word(words):
-    word = random.choice(words)  
-    while '-' in word or ' ' in word:
-        word = random.choice(words)
+def get_valid_word(words, min_length, max_length):
+    valid_words = []
+    for word in words:
+        if len(word) >= min_length and len(word) <= max_length:
+            valid_words.append(word)
 
-    return word.upper()
+    return random.choice(valid_words).upper()
 
 
 def hangman():
-    word = get_valid_word(words)
+    word = get_valid_word(words, 7, 8)
     word_letters = set(word) 
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  
